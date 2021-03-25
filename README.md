@@ -7,39 +7,18 @@ Pour simplifier le problème, nous considérerons que toutes ces pièces et bill
 
 Voici quelques exemples de rendu de monnaie :
 
-Monnaie à rendre
+Monnaie à rendre         Solutions possibles         Solution optimale
 
-Solutions possibles
+1                          Impossible                 Impossible
 
-Solution optimale
+6                          2 + 2 + 2                  2 + 2 + 2
 
-1
+10                         2 + 2 + 2 + 2 + 2          10
+                           5 + 5
+                           10
 
-Impossible
 
-Impossible
-
-6
-
-2 + 2 + 2
-
-2 + 2 + 2
-
-10
-
-2 + 2 + 2 + 2 + 2
-
-5 + 5
-
-10
-
-10
-
-9223372036854775807
-
-...
-
-(10 * 922337203685477580) + 5 + 2
+9223372036854775807        ...                        (10 * 922337203685477580) + 5 + 2
 
 
 Le rendu de monnaie est exprimé par un objet Monnaie . Cet objet a 3 propriétés : piece2, billet5 et billet10 qui, respectivement, stockent le nombre de pièces de 2€, de billets de 5€ et de billets de 10€.
