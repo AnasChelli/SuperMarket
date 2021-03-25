@@ -13,13 +13,13 @@ namespace SuperMarketTest
             2
         };
 
-        public Monnaie MonnaieOptimale(long moneyToBeReturned)
+        public Money MonnaieOptimale(long moneyToBeReturned)
         {
 
             var filtredAvailablePieces = _availablePieces.Where(x => x <= moneyToBeReturned);
             var optimalNumberOfPiecesByAvailablePieces = GetOptimal(moneyToBeReturned, filtredAvailablePieces);
 
-            return optimalNumberOfPiecesByAvailablePieces.Any() ? new Monnaie
+            return optimalNumberOfPiecesByAvailablePieces.Any() ? new Money
             {
                 Piece2 = optimalNumberOfPiecesByAvailablePieces.ContainsKey(2) ? optimalNumberOfPiecesByAvailablePieces[2] : 0,
                 Billet5 = optimalNumberOfPiecesByAvailablePieces.ContainsKey(5) ? optimalNumberOfPiecesByAvailablePieces[5] : 0,
