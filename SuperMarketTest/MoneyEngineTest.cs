@@ -35,6 +35,16 @@ namespace SuperMarketTest
         }
 
         [Test]
+        public void Should_return_4_pieces_of_two_euro()
+        {
+            MoneyEngine moneyEngine = new MoneyEngine();
+            Money actual = moneyEngine.MonnaieOptimale(8);
+            Check.That(actual.Piece2).Equals(4);
+            Check.That(actual.Billet5).Equals(0);
+            Check.That(actual.Billet10).Equals(0);
+        }
+
+        [Test]
         public void Should_return_1_billet_of_ten_euro_and_1_billet_of_five_euro()
         {
             MoneyEngine moneyEngine = new MoneyEngine();

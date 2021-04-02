@@ -15,40 +15,38 @@ namespace SuperMarketTest
 
         public Money MonnaieOptimale(long moneyToBeReturned)
         {
+            var optimalNumberByPieces = GetOptimalNumberByPieces(moneyToBeReturned);
 
-            var filtredAvailablePieces = _availablePieces.Where(x => x <= moneyToBeReturned);
-            var optimalNumberOfPiecesByAvailablePieces = GetOptimal(moneyToBeReturned, filtredAvailablePieces);
-
-            return optimalNumberOfPiecesByAvailablePieces.Any() ? new Money
+            return optimalNumberByPieces.Any() ? new Money
             {
-                Piece2 = optimalNumberOfPiecesByAvailablePieces.ContainsKey(2) ? optimalNumberOfPiecesByAvailablePieces[2] : 0,
-                Billet5 = optimalNumberOfPiecesByAvailablePieces.ContainsKey(5) ? optimalNumberOfPiecesByAvailablePieces[5] : 0,
-                Billet10 = optimalNumberOfPiecesByAvailablePieces.ContainsKey(10) ? optimalNumberOfPiecesByAvailablePieces[10] : 0
+                Piece2 = optimalNumberByPieces.ContainsKey(2) ? optimalNumberByPieces[2] : 0,
+                Billet5 = optimalNumberByPieces.ContainsKey(5) ? optimalNumberByPieces[5] : 0,
+                Billet10 = optimalNumberByPieces.ContainsKey(10) ? optimalNumberByPieces[10] : 0
             } : null;
         }
 
-        private static IDictionary<long, long> GetOptimal(long moneyToBeReturned, IEnumerable<long> availablePieces)
+        private IDictionary<long, long> GetOptimalNumberByPieces(long money)
         {
-            long nbPieces = -1;
-            var optimalNumberOfPiecesByAvailablePieces = new Dictionary<long, long>();
+            var giveBackChange = money;
+            var optimalNumberByPieces = new Dictionary<long, long>();
 
-            foreach (var availablePiece in availablePieces)
+            foreach (var availablePiece in _availablePieces.Where(x => x <= giveBackChange))
             {
-                while (nbPieces != 0)
+                if(!IsPossibleToGiveBackChange(giveBackChange, availablePiece))
                 {
-                    nbPieces = moneyToBeReturned % availablePiece;
-                    if (nbPieces == 1)
-                    {
-                        break;
-                    }
-
-                    optimalNumberOfPiecesByAvailablePieces.Add(availablePiece, moneyToBeReturned / availablePiece);
-                    moneyToBeReturned = nbPieces;
-                    break;
+                    continue;
                 }
+
+                optimalNumberByPieces.Add(availablePiece, giveBackChange / availablePiece);
+                giveBackChange %= availablePiece;
             }
 
-            return optimalNumberOfPiecesByAvailablePieces;
+            return optimalNumberByPieces;
+        }
+
+        private static bool IsPossibleToGiveBackChange(long giveBackChange, long availablePiece)
+        {
+            return giveBackChange % availablePiece != 1 && giveBackChange % availablePiece != 3;
         }
     }
 }
