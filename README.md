@@ -1,3 +1,4 @@
+[![.NET](https://github.com/AnasChelli/SuperMarket/actions/workflows/dotnet.yml/badge.svg)](https://github.com/AnasChelli/SuperMarket/actions/workflows/dotnet.yml)
 # SuperMarket
 Une des problématiques rencontrées avec le paiement en espèces est le rendu de monnaie : comment rendre une somme donnée de façon optimale, c'est-à-dire avec le nombre minimal de pièces et billets ? C'est un problème qui se pose à chacun de nous quotidiennement, à fortiori aux caisses automatiques.
 
