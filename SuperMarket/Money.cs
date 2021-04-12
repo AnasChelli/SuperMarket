@@ -1,4 +1,4 @@
-﻿namespace SuperMarketTest
+﻿namespace SuperMarket
 {
     public class Money
     {

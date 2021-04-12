@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using static SuperMarket.Constants.Constant;
 
-namespace SuperMarketTest
+namespace SuperMarket
 {
     public class MoneyEngine
     {
-        private readonly List<long> _availablePieces = new List<long>
+        private readonly List<long> _availablePieces = new()
         {
-            10,
-            5,
-            2
+            TenEuro,
+            FiveEuro,
+            TwoEuro
         };
 
         public Money MonnaieOptimale(long moneyToBeReturned)
@@ -19,9 +19,9 @@ namespace SuperMarketTest
 
             return optimalNumberByPieces.Any() ? new Money
             {
-                Piece2 = optimalNumberByPieces.ContainsKey(2) ? optimalNumberByPieces[2] : 0,
-                Billet5 = optimalNumberByPieces.ContainsKey(5) ? optimalNumberByPieces[5] : 0,
-                Billet10 = optimalNumberByPieces.ContainsKey(10) ? optimalNumberByPieces[10] : 0
+                Piece2 = optimalNumberByPieces.ContainsKey(TwoEuro) ? optimalNumberByPieces[TwoEuro] : 0,
+                Billet5 = optimalNumberByPieces.ContainsKey(FiveEuro) ? optimalNumberByPieces[FiveEuro] : 0,
+                Billet10 = optimalNumberByPieces.ContainsKey(TenEuro) ? optimalNumberByPieces[TenEuro] : 0
             } : null;
         }
 
@@ -32,7 +32,7 @@ namespace SuperMarketTest
 
             foreach (var availablePiece in _availablePieces.Where(x => x <= giveBackChange))
             {
-                if(!IsPossibleToGiveBackChange(giveBackChange, availablePiece))
+                if (!IsPossibleToGiveBackChange(giveBackChange, availablePiece))
                 {
                     continue;
                 }
